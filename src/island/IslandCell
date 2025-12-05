@@ -1,1 +1,49 @@
+package island;
 
+import animals.Animal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class IslandCell {
+    private final int x;
+    private final int y;
+    private final List<Animal> animals;
+    private double plants;
+    private final double maxPlants = 200;
+
+    public IslandCell(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.animals = new CopyOnWriteArrayList<>();
+        this.plants = 100;
+    }
+
+    public void addAnimal(Animal animal) {
+        animals.add(animal);
+    }
+
+    public void removeAnimal(Animal animal) {
+        animals.remove(animal);
+    }
+
+    public List<Animal> getAnimals() {
+        return new ArrayList<>(animals);
+    }
+
+    public double getPlants() {
+        return plants;
+    }
+
+    public void removePlants(double amount) {
+        plants = Math.max(0, plants - amount);
+    }
+
+    public void growPlants() {
+        plants += 10;
+        if (plants > maxPlants) plants = maxPlants;
+    }
+
+    public int getX() { return x; }
+    public int getY() { return y; }
+}
